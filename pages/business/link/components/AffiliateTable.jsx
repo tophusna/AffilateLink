@@ -16,7 +16,7 @@ const AffiliateTable = () => {
   const [offers, setOffers] = useState([])
   const [modalShow, setModalShow] = useState(false)
   const [modalInfoShow, setModalInfoShow] = useState(false)
-  const [selectedOfferId, setSelectedOfferId] = useState(1)
+  const [selectedOfferId, setSelectedOfferId] = useState(999999999)
   const [isHovered, setIsHovered] = useState('');
   const [isAction, setIsAction] = useState(false);
 
@@ -120,7 +120,7 @@ const AffiliateTable = () => {
         <div className="tabs__content pt-30 js-tabs-content">
           <div className="tabs__pane -tab-item-1 is-tab-el-active">
             <div className="overflow-scroll scroll-bar-1">
-              <div className="d-flex justify-content-between">
+              {/* <div className="d-flex justify-content-between">
                 <div></div>
                 <button
                   className="button h-50 px-24 -dark-1 bg-blue-1 text-white mb-10"
@@ -128,7 +128,7 @@ const AffiliateTable = () => {
                 >
                   <div className="icon-plus mr-15" /> Add 
                 </button>
-              </div>
+              </div> */}
               <table className="table-3 -border-bottom col-12">
                 <thead className="bg-light-2">
                   <tr>

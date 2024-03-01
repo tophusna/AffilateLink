@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { makeLink } from "../../../../services/affiliate/offer";
 import { ToastContainer, toast } from "react-toastify";
+import { getOffers } from "../../../../services/affiliate/offer";
 
 const makeLinkModal = (props) => {
   const offer = props.dataSource
@@ -10,13 +11,25 @@ const makeLinkModal = (props) => {
   const offerLinkRef = useRef(null)
   const affiliateLinkRef = useRef(null)
   const domainRef = useRef(null)
+  const resultLinkRef = useRef(null)
+
+  const [resultLink, setResultLink] = useState('')
+
+  // const getOffersInPage = async (page) => {
+  //   const res = await getOffers(page)
+  //   if (res.success) {
+  //     console.log('offers===>', res)
+  //     resultLinkRef.current.value = res.resultLink
+  //   }
+  // }
 
   useEffect(() => {
     if (offer) {
-      createLinkRef.current.value = offer.createLink
-      offerLinkRef.current.value = offer.offerLink
-      affiliateLinkRef.current.value = offer.affiliateLink
-      domainRef.current.value = offer.domain
+      createLinkRef.current.value = offer.createLink || ''
+      offerLinkRef.current.value = offer.offerLink || ''
+      affiliateLinkRef.current.value = offer.affiliateLink || ''
+      domainRef.current.value = offer.domain || ''
+      resultLinkRef.current.value = offer.resultLink || ''
     }
   }, [])
 
@@ -27,6 +40,7 @@ const makeLinkModal = (props) => {
     const offerLink = offerLinkRef.current.value
     const affiliateLink = affiliateLinkRef.current.value
     const domain = domainRef.current.value
+    const resultLink = resultLinkRef.current.value
 
     if (offer) {
       const formData = {
@@ -40,15 +54,16 @@ const makeLinkModal = (props) => {
         offerLink,
         affiliateLink,
         domain,
+        resultLink
       }
       const res = await makeLink(formData)
       if (res.success) {
         toast.success(res.message);
         props.update(props.current)
+        resultLinkRef.current.value = res.resultLink
       }
     } 
-    
-    props.closeModal()
+    // props.closeModal()
   }
   
   return (
@@ -83,6 +98,14 @@ const makeLinkModal = (props) => {
                   <input ref={domainRef} type="text" />
                   <label className="lh-1 text-16 text-light-1">
                     Domain
+                  </label>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-input ">
+                  <input ref={resultLinkRef} type="text" />
+                  <label className="lh-1 text-16 text-light-1">
+                    Result Link
                   </label>
                 </div>
               </div>

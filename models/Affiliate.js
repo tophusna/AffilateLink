@@ -30,6 +30,9 @@ const AffiliateSchema = new mongoose.Schema({
   domain: {
     type: String,
   },
+  resultLink: {
+    type: String,
+  }
 });
 const Affiliate = mongoose.models.Affiliate || mongoose.model("Affiliate", AffiliateSchema);
 
