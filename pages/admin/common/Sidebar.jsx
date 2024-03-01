@@ -22,8 +22,8 @@ const Sidebar = () => {
     {
       id: 3,
       icon: "/img/dashboard/sidebar/hotel.svg",
-      name: " Business ",
-      routePath: "/admin/business",
+      name: " Affiliate ",
+      routePath: "/admin/affiliate",
     }
   ];
   return (

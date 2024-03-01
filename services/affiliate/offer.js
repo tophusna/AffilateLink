@@ -18,21 +18,10 @@ export const getOffers = async (page) => {
   }
 };
 
-export const deleteUser = async (_id) => {
-  console.log("delete", _id)
-  try {
-    const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/user/deleteUser/${_id}`);
-    const data = res.data;
-    return data;
-  } catch (error) {
-    console.log("error in update (service) => ", error);
-  }
-};
-
-export const updateUser = async (formData) => {
+export const createOffer = async (formData) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/user/updateUser`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/affiliate/createOffer`,
       {
         method: "POST",
         headers: {
@@ -44,6 +33,36 @@ export const updateUser = async (formData) => {
     const data = res.json();
     return data;
   } catch (error) {
-    console.log("error in register (service) => ", error);
+    console.log("error in creating Offer Information (service) => ", error);
+  }
+};
+
+export const updateOffer = async (formData) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/affiliate/updateOffer`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in updating Offer Information (service) => ", error);
+  }
+};
+
+export const deleteOffer = async (_id) => {
+
+  try {
+    const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/affiliate/deleteOffer/${_id}`);
+    const data = res.data;
+    return data;
+  } catch (error) {
+    console.log("error in deleting Offer Information (service) => ", error);
   }
 };
