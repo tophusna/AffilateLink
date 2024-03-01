@@ -66,3 +66,22 @@ export const deleteOffer = async (_id) => {
     console.log("error in deleting Offer Information (service) => ", error);
   }
 };
+
+export const makeLink = async (formData) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/makeLink`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in making link (service) => ", error);
+  }
+};
