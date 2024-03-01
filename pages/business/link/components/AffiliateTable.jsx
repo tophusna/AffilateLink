@@ -135,6 +135,7 @@ const AffiliateTable = () => {
                     <th>AFFILIATE NAME</th>
                     <th>PAYOUT</th>
                     <th>CAP</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
