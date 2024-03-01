@@ -1,5 +1,5 @@
 import ConnectDB from "../../../../../DB/connectDB";
-import Offer from "../../../../../models/OfferInfo";
+import Offer from "../../../../../models/Affiliate";
 
 const { parse } = require('url');
 

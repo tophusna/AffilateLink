@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-import Icon from "react-multi-date-picker/components/icon";
 import { useRef } from "react";
-// import DatePicker from "react-datepicker";
-
 import DatePicker, { DateObject } from "react-multi-date-picker";
-
 import "react-datepicker/dist/react-datepicker.css";
-import { update_me } from "../../services/auth";
+import { update_me } from "../../../../services/auth";
 import { registerLocale } from "react-datepicker";
 import enUS from "date-fns/locale/en-US";
 registerLocale("en-US", enUS);
 
-const SignupDetail = (props) => {
+const MakeLink = (props) => {
   const avatarInputRef = useRef(null);
   const genderInputRef = useRef(null);
   const [avatar, setAvatar] = useState(null);
@@ -202,4 +198,4 @@ const SignupDetail = (props) => {
   );
 };
 
-export default SignupDetail;
+export default MakeLink;

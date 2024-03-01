@@ -28,7 +28,7 @@ const UserAdmin = () => {
               <div className="col-12">
                 <h1 className="text-30 lh-14 fw-600">Making Affiliate Link</h1>
                 <div className="text-15 text-light-1">
-                  Business / Link
+                  Affiliate / Link
                 </div>
               </div>
               {/* End .col-12 */}

@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import Pagination from "../../common/Pagination";
 import ActionsButton from "./ActionsButton";
-import { getOffers, deleteUser, updateUser } from "../../../../services/affiliate/offer";
+import { getOffers, deleteOffer, updateUser } from "../../../../services/affiliate/offer";
 import Image from "next/image";
 import Modal from "react-bootstrap/Modal";
 import Dropdown from "./Dropdown";
 import { ToastContainer, toast } from "react-toastify";
+import OfferEditModal from "./OfferEditModal";
+import updateModal from "./UpdateModal"
 
 const AffiliateTable = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -17,6 +19,9 @@ const AffiliateTable = () => {
   const [selectedOfferId, setSelectedOfferId] = useState(1)
   const [isHovered, setIsHovered] = useState('');
   const [isAction, setIsAction] = useState(false);
+
+  const [modalOfferShow, setModalOfferShow] = useState(false)
+
   
   const [selectedRole, setSeletedRole] = useState(null)
   const activeRef = useRef(null)
@@ -34,7 +39,6 @@ const AffiliateTable = () => {
   const getOffersInPage = async (page) => {
     const res = await getOffers(page)
     if (res.success) {
-      console.log('res===>', res.offers)
       setTotalPage(res.totalPages)
       setOffers(res.offers)
     }
@@ -49,7 +53,7 @@ const AffiliateTable = () => {
   };
 
   const handleTagClick = (pageIndex) => {
-    getUsersInPage(pageIndex)
+    getOffersInPage(pageIndex)
     setCurrentPage(pageIndex)
   }
 
@@ -63,13 +67,13 @@ const AffiliateTable = () => {
     
     !isAction && (
       setSelectedOfferId(id),
-      setModalInfoShow(true)
+      setModalOfferShow(true)
     )
 
   }
 
   const handleDelete = async (id) => {
-    const res = await deleteUser(id)
+    const res = await deleteOffer(id)
     console.log(res)
     if (res.success) {
       toast.success(res.message);
@@ -88,8 +92,8 @@ const AffiliateTable = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const isBanned = activeRef.current.checked ? false : true
-    const role = selectedRole? selectedRole: users[SelectedOfferId]?.role
-    const body = {id: users[SelectedOfferId]?._id, isBanned, role}
+    const role = selectedRole? selectedRole: users[selectedOfferId]?.role
+    const body = {id: users[selectedOfferId]?._id, isBanned, role}
     const res = await updateUser(body)
     if (res.success) {
       toast.success(res.message);
@@ -102,14 +106,19 @@ const AffiliateTable = () => {
     setSeletedRole(option)
   }
 
-  const chnageUserInfo = () => {
+  const addOffer = (id) => {
+    setModalOfferShow(true)
+  }
 
+  const handleOfferClose = () => {
+    setModalOfferShow(false)
+  setSelectedOfferId(9999999)
   }
 
   return (
     <>
       <div className="tabs -underline-2 js-tabs">
-        <div className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
+        {/* <div className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
           {tabItems.map((item, index) => (
             <div className="col-auto" key={index}>
               <button
@@ -121,12 +130,21 @@ const AffiliateTable = () => {
               </button>
             </div>
           ))}
-        </div>
+        </div> */}
         {/* End tabs */}
 
         <div className="tabs__content pt-30 js-tabs-content">
           <div className="tabs__pane -tab-item-1 is-tab-el-active">
             <div className="overflow-scroll scroll-bar-1">
+              <div className="d-flex justify-content-between">
+                <div></div>
+                <button
+                  className="button h-50 px-24 -dark-1 bg-blue-1 text-white mb-10"
+                  onClick={addOffer}
+                >
+                  <div className="icon-plus mr-15" /> Add 
+                </button>
+              </div>
               <table className="table-3 -border-bottom col-12">
                 <thead className="bg-light-2">
                   <tr>
@@ -160,7 +178,41 @@ const AffiliateTable = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        show={modalOfferShow}
+        onHide={handleOfferClose}
+        className="d-flex align-items-center justify-content-center"
+        size='lg'
+      >
+        <Modal.Header
+          closeButton
+          style={{ borderBottom: "none" }}
+        > <Modal.Title>Offer Info Edit</Modal.Title></Modal.Header>
+        <Modal.Body>
+          <OfferEditModal dataSource={offers[selectedOfferId]} closeModal={handleOfferClose} update={handleTagClick} current={currentPage} />
+        </Modal.Body>
+
+      </Modal>
+
+      <Modal
+        show={modalShow}
+        onHide={handleClose}
+        className="d-flex align-items-center justify-content-center"
+        size='lg'
+      >
+        <Modal.Header
+          closeButton
+          style={{ borderBottom: "none" }}
+        > <Modal.Title>Make Link</Modal.Title></Modal.Header>
+        <Modal.Body>
+          <OfferEditModal dataSource={offers[selectedOfferId]} closeModal={handleOfferClose} update={handleTagClick} current={currentPage} />
+        </Modal.Body>
+
+      </Modal>
+
       {/* <Modal
+      
         show={modalShow}
         onHide={handleClose}
         className="d-flex align-items-center justify-content-center"

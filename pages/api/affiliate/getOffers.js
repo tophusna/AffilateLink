@@ -1,5 +1,5 @@
 import ConnectDB from "../../../DB/connectDB";
-import OfferInfo from "../../../models/OfferInfo";
+import OfferInfo from "../../../models/Affiliate";
 const { parse } = require('url');
 
 export default async (req, res) => {

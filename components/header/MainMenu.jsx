@@ -152,7 +152,7 @@ const MainMenu = ({ style = "" }) => {
           <Link href="/contact">Contact</Link>
         </li> */}
         {user._id && <li className={router.pathname === "/business/link" ? "current" : ""}>
-          <Link href="/business/link">Businesses</Link>
+          <Link href="/business/link">Affiliate</Link>
         </li>}
         {user.role === "admin" && <li className={router.pathname.slice(0, 5) === "/admin" ? "current" : ""}>
           <Link href="/admin/dashboard">Administrator</Link>

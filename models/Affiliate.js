@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const OfferInfoSchema = new mongoose.Schema({
+const AffiliateSchema = new mongoose.Schema({
   offerName: {
     type: String,
     // required: true,
@@ -19,6 +19,6 @@ const OfferInfoSchema = new mongoose.Schema({
     type: String,
   }
 });
-const OfferInfo = mongoose.models.OfferInfo || mongoose.model("OfferInfo", OfferInfoSchema);
+const Affiliate = mongoose.models.Affiliate || mongoose.model("Affiliate", AffiliateSchema);
 
-export default OfferInfo;
+export default Affiliate;

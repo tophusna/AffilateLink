@@ -1,29 +1,27 @@
-import ConnectDB from "../../../../DB/connectDB";
-import sponsorBusiness from "../../../../models/sponsor_business";
+import ConnectDB from "../../../DB/connectDB";
+import Offer from "../../../models/Affiliate";
 
 export default async (req, res) => {
   await ConnectDB();
 
-  const { id, businessname, industry, city, address, contact, phone, images } = req.body;
+  const { id, offerName, offerID, affiliateName, payout, cap } = req.body;
 
   try {
-    const updatedBusiness = await sponsorBusiness.findByIdAndUpdate(id, {
-      BusinessName: businessname,
-      Industry: industry,
-      City: city,
-      Address: address,
-      ContactName: contact,
-      Phone: phone,
-      BImage: images
+    const updatedOffer = await Offer.findByIdAndUpdate(id, {
+      offerName: offerName,
+      offerID: offerID,
+      affiliateName: affiliateName,
+      payout: payout,
+      cap: cap,
     });
 
-    if (!updatedBusiness) {
-      return res.status(404).json({ error: "Sponsor Business not found" });
+    if (!updatedOffer) {
+      return res.status(404).json({ error: "Offer not found" });
     }
-    console.log(updatedBusiness)
-    res.status(200).json({ success: true, message: "Sponsor Business updated successfully" });
+    console.log(updatedOffer)
+    res.status(200).json({ success: true, message: "Offer updated successfully" });
   } catch (error) {
-    console.error("Error updating Sponsor Business:", error);
+    console.error("Error updating Offer:", error);
     res.status(500).json({
       success: false,
       error: "Internal server error",

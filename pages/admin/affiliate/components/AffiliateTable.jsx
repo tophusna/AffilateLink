@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Pagination from "../../common/Pagination";
 import ActionsButton from "./ActionsButton";
-import { getOffers, deleteUser, updateUser } from "../../../../services/affiliate/offer";
+import { getOffers, deleteOffer, updateUser } from "../../../../services/affiliate/offer";
 import Image from "next/image";
 import Modal from "react-bootstrap/Modal";
 import Dropdown from "./Dropdown";
@@ -52,7 +52,7 @@ const AffiliateTable = () => {
   };
 
   const handleTagClick = (pageIndex) => {
-    getUsersInPage(pageIndex)
+    getOffersInPage(pageIndex)
     setCurrentPage(pageIndex)
   }
 
@@ -66,13 +66,13 @@ const AffiliateTable = () => {
     
     !isAction && (
       setSelectedOfferId(id),
-      setModalInfoShow(true)
+      setModalOfferShow(true)
     )
 
   }
 
   const handleDelete = async (id) => {
-    const res = await deleteUser(id)
+    const res = await deleteOffer(id)
     console.log(res)
     if (res.success) {
       toast.success(res.message);
@@ -105,16 +105,13 @@ const AffiliateTable = () => {
     setSeletedRole(option)
   }
 
-  const chnageUserInfo = () => {
-
-  }
-
   const addOffer = (id) => {
     setModalOfferShow(true)
   }
 
   const handleOfferClose = () => {
     setModalOfferShow(false)
+  setSelectedOfferId(9999999)
   }
 
   return (

@@ -21,7 +21,7 @@ export const getOffers = async (page) => {
 export const createOffer = async (formData) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/affiliate/createOffer`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/createOffer`,
       {
         method: "POST",
         headers: {
@@ -40,7 +40,7 @@ export const createOffer = async (formData) => {
 export const updateOffer = async (formData) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/affiliate/updateOffer`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/updateOffer`,
       {
         method: "PUT",
         headers: {
@@ -59,7 +59,7 @@ export const updateOffer = async (formData) => {
 export const deleteOffer = async (_id) => {
 
   try {
-    const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/affiliate/deleteOffer/${_id}`);
+    const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/deleteOffer/${_id}`);
     const data = res.data;
     return data;
   } catch (error) {
