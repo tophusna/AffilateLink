@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Pagination from "../../common/Pagination";
 import ActionsButton from "./ActionsButton";
-import { getUsers, deleteUser, updateUser } from "../../../../services/admin/user";
+import { getOffers, deleteUser, updateUser } from "../../../../services/affiliate/offer";
 import Image from "next/image";
 import Modal from "react-bootstrap/Modal";
 import Dropdown from "./Dropdown";
@@ -11,10 +11,10 @@ const AffiliateTable = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1)
-  const [users, setUsers] = useState([])
+  const [offers, setOffers] = useState([])
   const [modalShow, setModalShow] = useState(false)
   const [modalInfoShow, setModalInfoShow] = useState(false)
-  const [selectedUserId, setSelectedUserId] = useState(1)
+  const [selectedOfferId, setSelectedOfferId] = useState(1)
   const [isHovered, setIsHovered] = useState('');
   const [isAction, setIsAction] = useState(false);
   
@@ -31,16 +31,17 @@ const AffiliateTable = () => {
     // "Banned",
   ];
 
-  const getUsersInPage = async (page) => {
-    const res = await getUsers(page)
+  const getOffersInPage = async (page) => {
+    const res = await getOffers(page)
     if (res.success) {
+      console.log('res===>', res.offers)
       setTotalPage(res.totalPages)
-      setUsers(res.users)
+      setOffers(res.offers)
     }
   }
 
   useEffect(() => {
-    getUsersInPage()
+    getOffersInPage()
   }, [])
 
   const handleMouseEnter = (id) => {
@@ -53,15 +54,15 @@ const AffiliateTable = () => {
   }
 
   const handleUpdate = (id) => {
-    setSelectedUserId(id)
+    setSelectedOfferId(id)
     setModalShow(true)
 
   }
 
-  const showUserInfo = (id) => {
+  const showOfferInfo = (id) => {
     
     !isAction && (
-      setSelectedUserId(id),
+      setSelectedOfferId(id),
       setModalInfoShow(true)
     )
 
@@ -87,8 +88,8 @@ const AffiliateTable = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const isBanned = activeRef.current.checked ? false : true
-    const role = selectedRole? selectedRole: users[selectedUserId]?.role
-    const body = {id: users[selectedUserId]?._id, isBanned, role}
+    const role = selectedRole? selectedRole: users[SelectedOfferId]?.role
+    const body = {id: users[SelectedOfferId]?._id, isBanned, role}
     const res = await updateUser(body)
     if (res.success) {
       toast.success(res.message);
@@ -140,24 +141,14 @@ const AffiliateTable = () => {
                 </thead>
                 <tbody>
                   {
-                    users.map(({ _id, username, email, avatar, role, isBanned }, index) =>
-                      <tr key={_id} onClick={() => showUserInfo(index)} onMouseEnter={() => handleMouseEnter(_id)} id={_id}  style={{ backgroundColor: isHovered === _id ? 'lightblue' : 'white' }}>
-                        <td>
-                          <Image
-                            width={50}
-                            height={50}
-                            src={avatar}
-                            alt={username}
-                            className="size-50 rounded-22 object-cover"
-                          /></td>
-                        <td>{username}</td>
-                        <td>{email}</td>
-                        <td>{role}</td>
-                        <td>
-                          <span className={`rounded-100 py-4 px-10 text-center text-14 fw-500 ` + (isBanned ? 'bg-error-1 text-error-2' : 'bg-success-1 text-success-2')}>
-                            {isBanned ? "Banned" : "Active"}
-                          </span>
-                        </td>
+                    offers.map(({ _id, offerName, offerID, affiliateName, payout, cap }, index) =>
+                      <tr key={_id} onClick={() => showOfferInfo(index)} onMouseEnter={() => handleMouseEnter(_id)} id={_id}  style={{ backgroundColor: isHovered === _id ? 'lightblue' : 'white' }}>
+                        <td></td>
+                        <td>{offerName}</td>
+                        <td>{offerID}</td>
+                        <td>{affiliateName}</td>
+                        <td>{payout}</td>
+                        <td>{cap}</td>
                         <td onMouseEnter={() => setIsAction(true)} onMouseLeave={() => setIsAction(false)} > 
                           <ActionsButton onDelete={handleDelete} onUpdate={handleUpdate} id={_id} index={index}  />
                         </td>
@@ -169,7 +160,7 @@ const AffiliateTable = () => {
           </div>
         </div>
       </div>
-      <Modal
+      {/* <Modal
         show={modalShow}
         onHide={handleClose}
         className="d-flex align-items-center justify-content-center"
@@ -183,13 +174,13 @@ const AffiliateTable = () => {
             <form className="row y-gap-20 pt-20" onSubmit={handleSubmit}>
               <div className="col-12">
                 <Image
-                  src={users[selectedUserId]?.avatar ? users[selectedUserId]?.avatar : "/img/avatars/user_people_icon.svg"}
+                  src={users[selectedOfferId]?.avatar ? users[selectedOfferId]?.avatar : "/img/avatars/user_people_icon.svg"}
                   alt="Avatar Preview"
                   width={250}
                   height={250}
                   className="size-250 rounded-full object-cover"
                 />
-                <p className="text-20 mt-10 fw-600">{`${users[selectedUserId]?.firstname} ${users[selectedUserId]?.lastname}`}</p>
+                <p className="text-20 mt-10 fw-600">{`${users[selectedOfferId]?.firstname} ${users[selectedOfferId]?.lastname}`}</p>
               </div>
               <div className="col-md-12 col-12 d-flex mt-20">
                 <div className="col-md-6">
@@ -197,7 +188,7 @@ const AffiliateTable = () => {
                     Role
                   </label>
                   <div className="border border-2 border-dark mr-10">
-                    <Dropdown options={["admin", "user", "city owner", "business owner"]} originalOption = {users[selectedUserId]?.role} handleOptionChange={handleOptionChange} />
+                    <Dropdown options={["admin", "user", "city owner", "business owner"]} originalOption = {users[selectedOfferId]?.role} handleOptionChange={handleOptionChange} />
                   </div>
                 </div>
                 <div className="col-md-6 pl-20">
@@ -214,7 +205,7 @@ const AffiliateTable = () => {
                           name="rating"
                           value="active"
                           ref={activeRef}
-                          defaultChecked={!users[selectedUserId]?.isBanned}
+                          defaultChecked={!users[selectedOfferId]?.isBanned}
                         />
                         <div className="radio__mark">
                           <div className="radio__icon" />
@@ -230,7 +221,7 @@ const AffiliateTable = () => {
                           name="rating"
                           value="ban"
                           ref={banRef}
-                          defaultChecked={users[selectedUserId]?.isBanned}
+                          defaultChecked={users[selectedOfferId]?.isBanned}
                         />
                         <div className="radio__mark">
                           <div className="radio__icon" />
@@ -285,21 +276,20 @@ const AffiliateTable = () => {
               <Image
                 width={200}
                 height={200}
-                src={users[selectedUserId]?.avatar ? users[selectedUserId]?.avatar : "/img/avatars/user_people_icon.svg"}
-                // src="/uploads/6581896618f6bbf20dd734c0.png"
+                src={users[selectedOfferId]?.avatar ? users[selectedOfferId]?.avatar : "/img/avatars/user_people_icon.svg"}
                 alt="avatar"
                 className="img-ratio rounded-4"
               />
             </div>
             <div className="row x-gap-20 y-gap-20 text-left">
                 <h4>
-                  {users[selectedUserId]?.username}
+                  {users[selectedOfferId]?.username}
                 </h4>
                 <h5>
-                  {users[selectedUserId]?.email}
+                  {users[selectedOfferId]?.email}
                 </h5>
                 <h5>
-                  {users[selectedUserId]?.role}
+                  {users[selectedOfferId]?.role}
                 </h5>
             </div>
         </div>
@@ -307,27 +297,24 @@ const AffiliateTable = () => {
         <div className="border-top-light mt-30 mb-30" />
 
           
-            {/* End col-12 */}
 
             <div className="col-md-6">
               <div className="form-input ">
-                <input value={users[selectedUserId]?.firstname} name="firstname" type="text" required />
+                <input value={users[selectedOfferId]?.firstname} name="firstname" type="text" required />
                 <label className="lh-1 text-16 text-light-1">First Name</label>
               </div>
             </div>
-            {/* End col-6 */}
 
             <div className="col-md-6">
               <div className="form-input ">
-                <input value={users[selectedUserId]?.lastname} name="lastname" type="text" required />
+                <input value={users[selectedOfferId]?.lastname} name="lastname" type="text" required />
                 <label className="lh-1 text-16 text-light-1">Last Name</label>
               </div>
             </div>
-            {/* End col-6 */}
 
             <div className="col-md-6">
               <div className="form-input ">
-                <input value={users[selectedUserId]?.phonenumber} name="phone_number" type="text" />
+                <input value={users[selectedOfferId]?.phonenumber} name="phone_number" type="text" />
                 <label className="lh-1 text-16 text-light-1">
                   Phone Number
                 </label>
@@ -336,17 +323,16 @@ const AffiliateTable = () => {
 
             <div className="col-md-6">
               <div className="form-input ">
-                <input value={users[selectedUserId]?.location} name="location" type="text" />
+                <input value={users[selectedOfferId]?.location} name="location" type="text" />
                 <label className="lh-1 text-16 text-light-1">
                   Location
                 </label>
               </div>
             </div>
-            {/* End col-6 */}
 
             <div className="col-md-6">
               <div className="form-input ">
-                <input value={users[selectedUserId]?.birthday} name="birthday" type="text" />
+                <input value={users[selectedOfferId]?.birthday} name="birthday" type="text" />
                 <label className="lh-1 text-16 text-light-1">
                   Birthday
                 </label>
@@ -354,25 +340,23 @@ const AffiliateTable = () => {
             </div>
             <div className="col-md-6">
               <div className="form-input ">
-                <input value={users[selectedUserId]?.gender} name="gender" type="text" />
+                <input value={users[selectedOfferId]?.gender} name="gender" type="text" />
                 <label className="lh-1 text-16 text-light-1">
                   Gender
                 </label>
               </div>
             </div>
-            {/* End col-6 */}
 
             <div className="col-md-6">
               <div className="form-input ">
-                <input value={users[selectedUserId]?.facebook} name="facebook" type="text" />
+                <input value={users[selectedOfferId]?.facebook} name="facebook" type="text" />
                 <label className="lh-1 text-16 text-light-1">facebook</label>
               </div>
             </div>
-            {/* End col-6 */}
 
             <div className="col-md-6">
               <div className="form-input ">
-                <input value={users[selectedUserId]?.twitter} name="twitter" type="text" />
+                <input value={users[selectedOfferId]?.twitter} name="twitter" type="text" />
                 <label className="lh-1 text-16 text-light-1">
                   Twitter
                 </label>
@@ -380,7 +364,6 @@ const AffiliateTable = () => {
             </div>
 
           </div>
-        {/* End col-xl-9 */}
         <div className="d-inline-block pt-30">
           <button
             className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
@@ -393,7 +376,7 @@ const AffiliateTable = () => {
           </div>
         </Modal.Body>
 
-      </Modal>
+      </Modal> */}
       <Pagination currentPage={currentPage} handleTagClick={handleTagClick} totalPage={totalPage} />
       <ToastContainer />
     </>
