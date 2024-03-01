@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import Dropdown from "./Dropdown";
 import { ToastContainer, toast } from "react-toastify";
 import OfferEditModal from "./OfferEditModal";
+import MakeLinkModal from "./MakeLinkModal"
 
 const AffiliateTable = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -190,6 +191,22 @@ const AffiliateTable = () => {
         > <Modal.Title>Offer Info Edit</Modal.Title></Modal.Header>
         <Modal.Body>
           <OfferEditModal dataSource={offers[selectedOfferId]} closeModal={handleOfferClose} update={handleTagClick} current={currentPage} />
+        </Modal.Body>
+
+      </Modal>
+
+      <Modal
+        show={modalShow}
+        onHide={handleClose}
+        className="d-flex align-items-center justify-content-center"
+        size='lg'
+      >
+        <Modal.Header
+          closeButton
+          style={{ borderBottom: "none" }}
+        > <Modal.Title>Make Link</Modal.Title></Modal.Header>
+        <Modal.Body>
+          <MakeLinkModal dataSource={offers[selectedOfferId]} closeModal={handleClose} update={handleTagClick} current={currentPage} />
         </Modal.Body>
 
       </Modal>
