@@ -15,7 +15,7 @@ const Block2 = () => {
     {
       id: 2,
       icon: "/img/featureIcons/1/2.svg",
-      title: "Easy & Quick Booking",
+      title: "Easy & Quick Making",
       text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
     },
     {

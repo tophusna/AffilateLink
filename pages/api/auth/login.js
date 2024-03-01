@@ -5,15 +5,17 @@ import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const schema = Joi.object({
-  email: Joi.string().email().required(),
+  // username: Joi.string().username().required(),
   password: Joi.string().required(),
 });
 
 export default async (req, res) => {
   await ConnectDB();
 
-  const { email, password } = req.body;
-  const { error } = schema.validate({ email, password });
+  console.log('body=sss>', req.body)
+
+  const { username, password } = req.body;
+  const { error } = schema.validate({ password });
 
 
   if (error)
@@ -23,8 +25,9 @@ export default async (req, res) => {
     });
 
   try {
-    const checkUser = await User.findOne({ email });
+    const checkUser = await User.findOne({ username });
 
+    console.log('checkUser=>', checkUser)
     if (!checkUser)
       return res
         .status(401)
@@ -38,7 +41,7 @@ export default async (req, res) => {
         .json({ success: false, message: "Incorrect Password" });
         
     const token = jwt.sign(
-      { id: checkUser._id, email: checkUser.email },
+      { id: checkUser._id, username: checkUser.username },
       process.env.JWT_SECRET,
       { expiresIn: "2h" }
     );

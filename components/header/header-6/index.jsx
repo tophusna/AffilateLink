@@ -18,7 +18,7 @@ const Header1 = () => {
   const [signinshow, setSigninShow] = useState(false);
   const [signupShow, setSignupShow] = useState(false);
   const [signupDetailShow, setsignupDetailShow] = useState(false);
-  const [byEmail, setByEmail] = useState(false);
+  const [byEmail, setByEmail] = useState(true);
   const { initiateUser } = UserSlice.actions
   const dispatch = useDispatch();
 
@@ -85,13 +85,16 @@ const Header1 = () => {
           <div className="row justify-between items-center">
             <div className="col-auto">
               <div className="d-flex items-center">
-                <Link href="/" className="header-logo mr-20 color-white">
-                  {/* <img
-                    src="/img/general/CityJabber.png"
-                    style={{ width: "200px", height: "auto" }}
+                <Link href="/" className="header-logo mr-20 d-flex items-center">
+                  <img
+                    src="/img/affiliate/logo.png"
+                    style={{ width: "50px", height: "auto", marginRight: 10 }}
                     alt="logo icon"
-                  /> */}
-                  AFFILIATE LINK
+                  />
+                  <p className="text-white text-lg">
+                    AFFILIATE
+                  </p>
+                  
                 </Link>
                 {/* End logo */}
               </div>
@@ -147,7 +150,7 @@ const Header1 = () => {
                     {!byEmail && (
                       <div className="row y-gap-20 mb-18 pt-16 pb-16">
                         <h1 className="text-24 fw-800  pl-30 pr-60 mb-30">
-                          Sign in to access the finest of CityJabber
+                          Sign in to Affiliate Link
                         </h1>
                         <LoginWithSocial />
                         <div className="col-12">
@@ -163,28 +166,26 @@ const Header1 = () => {
                       />
                     </div>
 
-                    <div className="col-12 text-center mt-10">
+                    {/* <div className="col-12 text-center mt-10">
                       <p className="mt-6">
                         <span
                           className="text-blue-1 "
                           style={{ cursor: "pointer" }}
                           onClick={handleSignupShow}
                         >
-                          Join{" "}
+                          Sing Up{" "}
                         </span>
-                        {/* Don&apos;t have an account yet?{" "} */}
-                        to unlock the best of the CityJabber
                       </p>
-                    </div>
+                    </div> */}
                   </Modal.Body>
                   <Modal.Footer style={{ borderTop: "none" }}>
                     <div className="col-12">
-                      <div className="text-center px-10">
+                      {/* <div className="text-center px-10">
                         <p className="text-14">
                           By creating an account, you agree to our Terms of
                           Service and Privacy Statement.
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </Modal.Footer>
                 </Modal>

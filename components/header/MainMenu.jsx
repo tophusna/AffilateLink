@@ -136,21 +136,24 @@ const MainMenu = ({ style = "" }) => {
         <li className={router.pathname === "/" ? "current" : ""}>
           <Link href="/">Home</Link>
         </li>
-        <li
+        {/* <li
           className={
             router.pathname === "/hotel/hotel-list-v1" ? "current" : ""
           }
         >
           <Link href="/hotel/hotel-list-v1">Businesses</Link>
-        </li>
-        <li
+        </li> */}
+        {/* <li
           className={router.pathname === "/blog/blog-list-v2" ? "current" : ""}
         >
           <Link href="/blog/blog-list-v2">Reviews</Link>
         </li>
         <li className={router.pathname === "/contact" ? "current" : ""}>
           <Link href="/contact">Contact</Link>
-        </li>
+        </li> */}
+        {user._id && <li className={router.pathname === "/business/link" ? "current" : ""}>
+          <Link href="/business/link">Businesses</Link>
+        </li>}
         {user.role === "admin" && <li className={router.pathname.slice(0, 5) === "/admin" ? "current" : ""}>
           <Link href="/admin/dashboard">Administrator</Link>
         </li>}

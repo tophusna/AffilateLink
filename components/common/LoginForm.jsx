@@ -9,17 +9,17 @@ import { login } from "../../features/auth/userslice";
 
 const LoginForm = (props) => {
   const dispatch = useDispatch();
-  const emailRef = useRef();
+  const usernameRef = useRef();
   const passwordRef = useRef();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const email = emailRef.current.value;
+    const username = usernameRef.current.value;
     const password = passwordRef.current.value;
 
     let loginData = {
-      email: email,
+      username: username,
       password: password,
     };
     dispatch(login(loginData))
@@ -58,10 +58,10 @@ const LoginForm = (props) => {
           {/* End .col */}
           <h1 className="text-24 fw-800  pl-30 pr-60 mb-30">Welcome back!</h1>
           <div className="col-12">
-            <p>Email Address</p>
+            <p>Username</p>
             <div className="form-input ">
-              <input type="text" required ref={emailRef} />
-              <label className="lh-1 text-14 text-light-1">Email</label>
+              <input type="text" required ref={usernameRef} />
+              <label className="lh-1 text-14 text-light-1">Username</label>
             </div>
           </div>
           {/* End .col */}
