@@ -1,31 +1,23 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { makeLink } from "../../../../services/affiliate/offer";
-import { ToastContainer, toast } from "react-toastify";
-import { getOffers } from "../../../../services/affiliate/offer";
-import MakeLink from './MakeLink'
-import AffiliateLinks from './AffiliateLinks'
+import AffiliateTable from "./AffiliateTable";
 
-const makeLinkModal = (props) => {
-  const offer = props.dataSource
-
+const Index = () => {
   const tabs = [
     {
-      label: "Making Link",
-      content: <MakeLink dataSource={offer} update={props.update} />,
+      label: "Personal Information",
+      content: <AffiliateTable />,
     },
     {
-      label: "Affiliate Links",
-      content: <AffiliateLinks dataSource={offer} update={props.update} />,
+      label: "Change Password",
+      content: <PasswordInfo />,
     },
   ];
 
   const [tabIndex, setTabIndex] = useState(0);
 
-  
   return (
-    <div className="col-12 text-center mt-10">
-      <Tabs
+    <Tabs
       className="tabs -underline-2 js-tabs"
       selectedIndex={tabIndex}
       onSelect={(index) => setTabIndex(index)}
@@ -53,9 +45,7 @@ const makeLinkModal = (props) => {
         ))}
       </div>
     </Tabs>
-          <ToastContainer />
-          </div>
   );
 };
 
-export default makeLinkModal;
+export default Index;

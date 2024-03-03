@@ -85,3 +85,99 @@ export const makeLink = async (formData) => {
     console.log("error in making link (service) => ", error);
   }
 };
+
+export const addOfferLink = async (formData) => {
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/addOfferLink`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in adding offer link (service) => ", error);
+  }
+};
+export const addUnsubedLink = async (formData) => {
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/addUnsubLink`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in adding offer link (service) => ", error);
+  }
+};
+export const addPriLink = async (formData) => {
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/addPrivacyLink`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in adding offer link (service) => ", error);
+  }
+};
+export const addConditionLink = async (formData) => {
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/addCondLink`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in adding offer link (service) => ", error);
+  }
+};
+export const addTelLink = async (formData) => {
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/addTelLink`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in adding offer link (service) => ", error);
+  }
+};

@@ -30,6 +30,21 @@ const AffiliateSchema = new mongoose.Schema({
   domain: {
     type: String,
   },
+  offLinks: {
+    type: String,
+  },
+  unsubLinks: {
+    type: String,
+  },
+  privacyLinks: {
+    type: String,
+  },
+  condLinks: {
+    type: String,
+  },
+  telLinks: {
+    type: String,
+  },
   resultLink: {
     type: String,
   }

@@ -182,8 +182,8 @@ const AffiliateTable = () => {
       <Modal
         show={modalShow}
         onHide={handleClose}
-        className="d-flex align-items-center justify-content-center"
-        size='lg'
+        className="d-flex align-items-center justify-content-center mt-100"
+        size='xl'
       >
         <Modal.Header
           closeButton
