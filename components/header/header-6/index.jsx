@@ -147,7 +147,7 @@ const Header1 = () => {
                       /> */}
                     </div>
 
-                    {!byEmail && (
+                    {/* {!byEmail && (
                       <div className="row y-gap-20 mb-18 pt-16 pb-16">
                         <h1 className="text-24 fw-800  pl-30 pr-60 mb-30">
                           Sign in to Affiliate Link
@@ -157,7 +157,7 @@ const Header1 = () => {
                           <div className="text-center">or sign in with</div>
                         </div>
                       </div>
-                    )}
+                    )} */}
                     <div className="mt-10">
                       <LoginForm
                         byEmail={byEmail}

@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import Router from "next/router";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,15 +8,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { login } from "../../features/auth/userslice";
 
 const LoginForm = (props) => {
-  const dispatch = useDispatch();
-  const usernameRef = useRef();
-  const passwordRef = useRef();
+  const dispatch = useDispatch()
+  const usernameRef = useRef()
+  const passwordRef = useRef()
+  const [passcode, setPasscode] = useState('')
+  const [logedin, setLogedin] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const username = usernameRef.current.value;
-    const password = passwordRef.current.value;
+    const username = usernameRef.current.value
+    const password = passwordRef.current.value
 
     let loginData = {
       username: username,
@@ -24,11 +26,11 @@ const LoginForm = (props) => {
     };
     dispatch(login(loginData))
       .then((res) => {
-        toast.success(res.message);
-        setTimeout(() => {
-          props.handleClose();
-          Router.push("/");
-        }, 1000);
+          toast.success(res.message);
+          setTimeout(() => {
+            props.handleClose();
+            Router.push("/");
+          }, 1000);
       })
       .catch((err) => toast.error(err.message));
   };
@@ -49,7 +51,7 @@ const LoginForm = (props) => {
 
   return (
     <div>
-      {props.byEmail ? (
+      {/* {props.byEmail ? ( */}
         <form
           className="row y-gap-20"
           style={{ paddingLeft: "30px", paddingRight: "30px" }}
@@ -97,7 +99,7 @@ const LoginForm = (props) => {
 
           {/* End .col */}
         </form>
-      ) : (
+      {/* ) : (
         <div
           className="col-md-12 col-12"
           style={{ paddingLeft: "15px", paddingRight: "15px" }}
@@ -114,7 +116,7 @@ const LoginForm = (props) => {
             <div className="col-md-11">Continue with email</div>
           </button>
         </div>
-      )}
+      )} */}
       <ToastContainer></ToastContainer>
     </div>
   );

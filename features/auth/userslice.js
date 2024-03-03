@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { register_me, login_me } from "../../services/auth";
+import { register_me, login_me, verify_me } from "../../services/auth";
 
 export const register = createAsyncThunk("auth/register", async (formdata) => {
   try {
@@ -13,6 +13,15 @@ export const register = createAsyncThunk("auth/register", async (formdata) => {
 export const login = createAsyncThunk("auth/login", async (formData) => {
   try {
     const response = await login_me(formData);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const verify = createAsyncThunk("auth/verify", async (formData) => {
+  try {
+    const response = await verify_me(formData);
     return response;
   } catch (error) {
     console.log(error);

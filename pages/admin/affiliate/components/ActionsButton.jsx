@@ -13,7 +13,7 @@ const ActionsButton = ({ id, index, onDelete, onUpdate }) => {
   };
 
   const actions = [
-    { label: "Update", value: "update" },
+    { label: "Make Link", value: "update" },
     { label: "Delete", value: "delete" },
   ];
 

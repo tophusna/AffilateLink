@@ -57,6 +57,25 @@ export const login_me = async (formData) => {
   }
 };
 
+export const verify_me = async (formData) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/verify`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in verify (service) => ", error);
+  }
+};
+
 export const change_password = async (formData) => {
   try {
     const res = await fetch(

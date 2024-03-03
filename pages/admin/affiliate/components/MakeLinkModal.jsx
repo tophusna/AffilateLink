@@ -1,65 +1,69 @@
 import React, { useState, useRef, useEffect } from "react";
-import { createOffer, updateOffer } from "../../../../services/affiliate/offer";
+import { makeLink } from "../../../../services/affiliate/offer";
 import { ToastContainer, toast } from "react-toastify";
+import { getOffers } from "../../../../services/affiliate/offer";
 
-const offerUpdateModal = (props) => {
+const makeLinkModal = (props) => {
   const offer = props.dataSource
 
-  const offerNameRef = useRef(null)
-  const offerIDRef = useRef(null)
-  const affiliateNameRef = useRef(null)
-  const payoutRef = useRef(null)
-  const capRef = useRef(null)
+  console.log('offer==>', offer)
+  const createLinkRef = useRef(null)
+  const offerLinkRef = useRef(null)
+  const affiliateLinkRef = useRef(null)
+  const domainRef = useRef(null)
+  const resultLinkRef = useRef(null)
+
+  const [resultLink, setResultLink] = useState('')
+
+  // const getOffersInPage = async (page) => {
+  //   const res = await getOffers(page)
+  //   if (res.success) {
+  //     console.log('offers===>', res)
+  //     resultLinkRef.current.value = res.resultLink
+  //   }
+  // }
 
   useEffect(() => {
     if (offer) {
-      offerNameRef.current.value = offer.offerName
-      offerIDRef.current.value = offer.offerID
-      affiliateNameRef.current.value = offer.affiliateName
-      payoutRef.current.value = offer.payout
-      capRef.current.value = offer.cap
+      createLinkRef.current.value = offer.createLink || ''
+      offerLinkRef.current.value = offer.offerLink || ''
+      affiliateLinkRef.current.value = offer.affiliateLink || ''
+      domainRef.current.value = offer.domain || ''
+      resultLinkRef.current.value = offer.resultLink || ''
     }
   }, [])
 
-  const updateofferInfo = async (e) => {
+  const getLink = async (e) => {
     e.preventDefault()
 
-    const offerName = offerNameRef.current.value
-    const offerID = offerIDRef.current.value
-    const affiliateName = affiliateNameRef.current.value
-    const cap = capRef.current.value
-    const payout = payoutRef.current.value
+    const createLink = createLinkRef.current.value
+    const offerLink = offerLinkRef.current.value
+    const affiliateLink = affiliateLinkRef.current.value
+    const domain = domainRef.current.value
+    const resultLink = resultLinkRef.current.value
 
     if (offer) {
       const formData = {
         id: offer._id,
-        offerName,
-        offerID,
-        affiliateName,
-        cap,
-        payout,
+        offerName: offer.offerName,
+        offerID: offer.offerID,
+        affiliateName: offer.affiliateName,
+        payout: offer.payout,
+        cap: offer.cap,
+        createLink,
+        offerLink,
+        affiliateLink,
+        domain,
+        resultLink
       }
-      const res = await updateOffer(formData)
+      const res = await makeLink(formData)
       if (res.success) {
         toast.success(res.message);
         props.update(props.current)
+        resultLinkRef.current.value = res.resultLink
       }
-    } else {
-      const formData = {
-        offerName,
-        offerID,
-        affiliateName,
-        cap,
-        payout,
-      }
-      const res = await createOffer(formData)
-      if (res.success) {
-        toast.success(res.message);
-        props.update(props.current)
-      }
-    }
-    
-    props.closeModal()
+    } 
+    // props.closeModal()
   }
   
   return (
@@ -69,39 +73,39 @@ const offerUpdateModal = (props) => {
           
               <div className="col-md-6">
                 <div className="form-input ">
-                  <input ref={offerNameRef} type="text" required />
-                  <label className="lh-1 text-16 text-light-1">Offer Name</label>
+                  <input ref={createLinkRef} type="text" required />
+                  <label className="lh-1 text-16 text-light-1">Create Link</label>
                 </div>
               </div>
               {/* End col-6 */}
               <div className="col-md-6">
                 <div className="form-input ">
-                  <input ref={offerIDRef} type="text" required />
-                  <label className="lh-1 text-16 text-light-1">Offer ID</label>
+                  <input ref={offerLinkRef} type="text" required />
+                  <label className="lh-1 text-16 text-light-1">Offer Link</label>
                 </div>
               </div>
               {/* End col-6 */}
               <div className="col-md-6">
                 <div className="form-input ">
-                  <input ref={affiliateNameRef} type="text" />
+                  <input ref={affiliateLinkRef} type="text" />
                   <label className="lh-1 text-16 text-light-1">
-                    Affiliate Name
+                    Affiliate Link
                   </label>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-input ">
-                  <input ref={payoutRef} type="text" />
+                  <input ref={domainRef} type="text" />
                   <label className="lh-1 text-16 text-light-1">
-                    Payout
+                    Domain
                   </label>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="form-input ">
-                  <input ref={capRef} type="text" />
+                  <input ref={resultLinkRef} type="text" />
                   <label className="lh-1 text-16 text-light-1">
-                    Cap
+                    Result Link
                   </label>
                 </div>
               </div>
@@ -109,9 +113,9 @@ const offerUpdateModal = (props) => {
             <div className="d-inline-block pt-30">
               <button
                 className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
-                onClick={updateofferInfo}
+                onClick={getLink}
               >
-                {offer ? 'Update Offer Info' : 'Create Offer Info' } <div className="icon-arrow-top-right ml-15" />
+                Get Link <div className="icon-arrow-top-right ml-15" />
               </button>
             </div>
           </form >
@@ -120,4 +124,4 @@ const offerUpdateModal = (props) => {
   );
 };
 
-export default offerUpdateModal;
+export default makeLinkModal;
