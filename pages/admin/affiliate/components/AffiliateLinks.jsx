@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { makeLink, addOfferLink, addUnsubedLink, addPriLink, addConditionLink, addTelLink,  } from "../../../../services/affiliate/offer";
 import { ToastContainer, toast } from "react-toastify";
-import { getOffers } from "../../../../services/affiliate/offer";
 
 const AffiliateLinks = (props) => {
   const offer = props.dataSource
@@ -88,6 +87,7 @@ const AffiliateLinks = (props) => {
 
   return (
     <div className="col-12 text-center mt-10">
+      
       <form>
         <div className="row y-gap-30">
           
@@ -141,7 +141,7 @@ const AffiliateLinks = (props) => {
                   <label className="lh-1 text-16 text-light-1">Insert Telephone Link</label>
                 </div>
                 <div className="">
-                  {offer.telephoneLinks?.split(",").slice(1, 100).map((link, i) => (
+                  {offer.telLinks?.split(",").slice(1, 100).map((link, i) => (
                     <div key={i}>{link}</div>
                   ))}
                 </div>

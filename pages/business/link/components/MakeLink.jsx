@@ -14,15 +14,16 @@ const makeLinkModal = (props) => {
 
   const [resultLink, setResultLink] = useState('')
 
-  // const getOffersInPage = async (page) => {
-  //   const res = await getOffers(page)
-  //   if (res.success) {
-  //     console.log('offers===>', res)
-  //     resultLinkRef.current.value = res.resultLink
-  //   }
-  // }
+  const getOffersInPage = async (page) => {
+    const res = await getOffers(page)
+    if (res.success) {
+      console.log('offers===>', res)
+      resultLinkRef.current.value = res.resultLink
+    }
+  }
 
   useEffect(() => {
+    
     if (offer) {
       createLinkRef.current.value = offer.createLink || ''
       offerLinkRef.current.value = offer.offerLink || ''
@@ -58,7 +59,7 @@ const makeLinkModal = (props) => {
       const res = await makeLink(formData)
       if (res.success) {
         toast.success(res.message);
-        props.update(props.current)
+        // props.update(props.current)
         resultLinkRef.current.value = res.resultLink
       }
     } 

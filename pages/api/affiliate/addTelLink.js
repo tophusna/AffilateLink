@@ -4,9 +4,7 @@ import Offer from "../../../models/Affiliate";
 export default async (req, res) => {
   await ConnectDB();
 
-  const { id, offLink } = req.body.formData;
-
-  console.log('offLink===>', req.body)
+  const { id, telLink } = req.body.formData;
 
   try {
     Offer.findOne({ _id: id }).then((item) => {

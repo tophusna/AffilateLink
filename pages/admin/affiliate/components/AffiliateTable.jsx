@@ -21,8 +21,6 @@ const AffiliateTable = () => {
   const [isAction, setIsAction] = useState(false);
 
   const [modalOfferShow, setModalOfferShow] = useState(false)
-
-  
   const [selectedRole, setSeletedRole] = useState(null)
   const activeRef = useRef(null)
   const banRef = useRef(null)
@@ -145,7 +143,7 @@ const AffiliateTable = () => {
                   {
                     offers.map(({ _id, offerName, offerID, affiliateName, payout, cap }, index) =>
                       <tr key={_id} onClick={() => showOfferInfo(index)} onMouseEnter={() => handleMouseEnter(_id)} id={_id}  style={{ backgroundColor: isHovered === _id ? 'lightblue' : 'white' }}>
-                        <td></td>
+                        <td>{index+1}</td>
                         <td>{offerName}</td>
                         <td>{offerID}</td>
                         <td>{affiliateName}</td>

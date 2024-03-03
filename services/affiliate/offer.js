@@ -178,6 +178,6 @@ export const addTelLink = async (formData) => {
     const data = res.json();
     return data;
   } catch (error) {
-    console.log("error in adding offer link (service) => ", error);
+    console.log("error in adding telephone link (service) => ", error);
   }
 };

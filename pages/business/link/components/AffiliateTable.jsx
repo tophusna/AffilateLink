@@ -144,8 +144,8 @@ const AffiliateTable = () => {
                 <tbody>
                   {
                     offers.map(({ _id, offerName, offerID, affiliateName, payout, cap }, index) =>
-                      <tr key={_id} onClick={() => showOfferInfo(index)} onMouseEnter={() => handleMouseEnter(_id)} id={_id}  style={{ backgroundColor: isHovered === _id ? 'lightblue' : 'white' }}>
-                        <td></td>
+                      <tr key={_id} onClick={() => showOfferInfo(index)} onMouseEnter={() => handleMouseEnter(_id)} id={_id}  style={{ backgroundColor: isHovered === _id ? 'lightblue' : 'white' }} >
+                        <td>{index + 1}</td>
                         <td>{offerName}</td>
                         <td>{offerID}</td>
                         <td>{affiliateName}</td>
@@ -182,8 +182,8 @@ const AffiliateTable = () => {
       <Modal
         show={modalShow}
         onHide={handleClose}
-        className="d-flex align-items-center justify-content-center"
-        size='lg'
+        className="d-flex align-items-center justify-content-center mt-100"
+        size='xl'
       >
         <Modal.Header
           closeButton
