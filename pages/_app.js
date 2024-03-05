@@ -15,6 +15,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from "react-redux";
 import { store, persistor } from "../app/store";
 
+require('dotenv').config();
+
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
 }

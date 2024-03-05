@@ -5,7 +5,7 @@ export default async (req, res) => {
   await ConnectDB();
 
   const { id, offerName, offerID, affiliateName, payout, cap, createLink, offerLink, affiliateLink, domain } = req.body;
-  const resultLink = domain + '/' + createLink + '?' + offerID + '&' + affiliateName + '&' + payout + '&' + cap
+  const resultLink = domain + '/' + createLink
 
   try {
     const updatedOffer = await Offer.findByIdAndUpdate(id, {

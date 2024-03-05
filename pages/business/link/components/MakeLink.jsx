@@ -3,6 +3,11 @@ import { makeLink } from "../../../../services/affiliate/offer";
 import { ToastContainer, toast } from "react-toastify";
 import { getOffers } from "../../../../services/affiliate/offer";
 
+let ElasticEmail = require('@elasticemail/elasticemail-client');
+ 
+
+
+
 const makeLinkModal = (props) => {
   const offer = props.dataSource
 
@@ -11,6 +16,8 @@ const makeLinkModal = (props) => {
   const affiliateLinkRef = useRef(null)
   const domainRef = useRef(null)
   const resultLinkRef = useRef(null)
+
+  const [recipient, setRecipient] = useState('')
 
   const [resultLink, setResultLink] = useState('')
 
@@ -22,8 +29,12 @@ const makeLinkModal = (props) => {
     }
   }
 
+  
+
   useEffect(() => {
     
+    console.log('apiKey==>', process.env.NEXT_PUBLIC_ELASTIC_EMAIL_API_KEY)
+
     if (offer) {
       createLinkRef.current.value = offer.createLink || ''
       offerLinkRef.current.value = offer.offerLink || ''
@@ -64,6 +75,50 @@ const makeLinkModal = (props) => {
       }
     } 
     // props.closeModal()
+  }
+
+  const handleRecipient = (e) => {
+    e.preventDefault()
+
+    setRecipient(e.target.value)
+  }
+
+  const sendEmail = async (e) => {
+    e.preventDefault()
+
+    const resultLink = resultLinkRef.current.value
+    let defaultClient = ElasticEmail.ApiClient.instance;
+ 
+    let apikey = defaultClient.authentications['apikey'];
+    apikey.apiKey = process.env.NEXT_PUBLIC_ELASTIC_EMAIL_API_KEY
+
+    let api = new ElasticEmail.EmailsApi()
+
+    let email = ElasticEmail.EmailMessageData.constructFromObject({
+      Recipients: [
+        new ElasticEmail.EmailRecipient(recipient)
+      ],
+      Content: {
+        Body: [
+          ElasticEmail.BodyPart.constructFromObject({
+            ContentType: "HTML",
+            Content: resultLink
+          })
+        ],
+        Subject: "Top Link",
+        From: "rohelakormoker8@gmail.com"
+      }
+    });
+ 
+    var callback = function(error, data, response) {
+      if (error) {
+        console.error(error);
+        toast.error(error)
+      } else {
+        toast.success('Email is sent successfully.');
+      }
+    };
+    api.emailsPost(email, callback);
   }
   
   return (
@@ -118,7 +173,21 @@ const makeLinkModal = (props) => {
                 Get Link <div className="icon-arrow-top-right ml-15" />
               </button>
             </div>
+            
           </form >
+          <div className="col-md-12 mt-30 mb-30 d-flex items-center">
+            <div className="form-input col-md-7 mr-10">
+              <input type="text" onChange={handleRecipient} value={recipient} />
+              <label className="h-60 text-16 text-light-1">
+                Recipient Email
+              </label>
+            </div>
+            <button
+              className="button h-60 px-24 -dark-1 bg-blue-1 text-white" onClick={sendEmail}
+            >
+              Submit <div className="icon-arrow-top-right ml-15" />
+            </button>
+            </div>
           <ToastContainer />
           </div>
   );
