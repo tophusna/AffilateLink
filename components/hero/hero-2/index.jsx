@@ -1,10 +1,6 @@
-import { useSelector, useDispatch } from "react-redux";
-import { addCurrentTab } from "../../../features/hero/findPlaceSlice";
-import MainFilterSearchBox from "./MainFilterSearchBox";
-import SelectFilter from '../../../components/hotels/filter-tabs/SelectFilter'
+import { useDispatch } from "react-redux";
 
 const Index = () => {
-  const { tabs, currentTab } = useSelector((state) => state.hero) || {};
   const dispatch = useDispatch();
 
   return (
@@ -15,22 +11,6 @@ const Index = () => {
 
       <div className="container">
         <div className="masthead__tabs">
-          <div className="tabs -bookmark-2 js-tabs">
-            <div className="tabs__controls d-flex items-center js-tabs-controls">
-              {tabs?.map((tab) => (
-                <button
-                  key={tab?.id}
-                  className={`tabs__button px-30 py-20 sm:px-20 sm:py-15 rounded-4 fw-600 text-white js-tabs-button ${
-                    tab?.name === currentTab ? "is-tab-el-active" : ""
-                  }`}
-                  onClick={() => dispatch(addCurrentTab(tab?.name))}
-                >
-                  <i className={`${tab.icon} text-20 mr-10 sm:mr-5`}></i>
-                  {tab?.name}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="masthead__content">
@@ -41,11 +21,6 @@ const Index = () => {
                 <br />
                 CUSTUMIZATION TOOL
               </h1>
-              {/* <p className="z-2 text-white mt-20">
-                Please seach the businesses easily.
-              </p> */}
-
-              {/* <MainFilterSearchBox /> */}
             </div>
 
             <div className="col-xl-7">

@@ -3,13 +3,9 @@ import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import MainMenu from "../MainMenu";
 import { useDispatch, useSelector } from "react-redux";
-import Cookies from "js-cookie";
 import LoginForm from "../../../components/common/LoginForm";
-import LoginWithSocial from "../../../components/common/LoginWithSocial";
 import SignUpForm from "../../common/SignUpForm";
 import SignupDetail from "../../../components/common/SignupDetail";
-import Router from "next/router";
-import Image from "next/image";
 import AvatarDropdown from "./UserAvatar";
 import { UserSlice } from "../../../features/auth/userslice";
 
