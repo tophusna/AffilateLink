@@ -181,3 +181,83 @@ export const addTelLink = async (formData) => {
     console.log("error in adding telephone link (service) => ", error);
   }
 };
+
+export const addSub = async (formData) => {
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/addSubject`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in adding subject (service) => ", error);
+  }
+};
+
+export const addName = async (formData) => {
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/addName`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in adding Name (service) => ", error);
+  }
+};
+
+export const editSubject = async (formData) => {
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/editSubject`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in editing Subject (service) => ", error);
+  }
+};
+
+export const editFromName = async (formData) => {
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/affiliate/editFromName`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.log("error in editing Name (service) => ", error);
+  }
+};

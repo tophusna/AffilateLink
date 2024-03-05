@@ -1,25 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { ToastContainer, toast } from "react-toastify";
-import MakeLink from './MakeLink'
-import AffiliateLinks from './AffiliateLinks'
-import SubAndName from './SubAndFrom'
 
-const makeLinkModal = (props) => {
-  const offer = props.dataSource
+import Dashboard from "./DashboardCard"
+import RateList from "./RateList"
+
+const DashTab = () => {
 
   const tabs = [
     {
-      label: "Making Link",
-      content: <MakeLink dataSource={offer} update={props.update} />,
+      label: "Dashboard",
+      content: <Dashboard />,
     },
     {
-      label: "Affiliate Links",
-      content: <AffiliateLinks dataSource={offer} update={props.update} />,
-    },
-    {
-      label: "Sub Lines & From Names",
-      content: <SubAndName dataSource={offer} update={props.update} />,
+      label: "Rates List",
+      content: <RateList />,
     },
   ];
 
@@ -29,10 +24,10 @@ const makeLinkModal = (props) => {
   return (
     <div className="col-12 text-center mt-10">
       <Tabs
-      className="tabs -underline-2 js-tabs"
-      selectedIndex={tabIndex}
-      onSelect={(index) => setTabIndex(index)}
-    >
+        className="tabs -underline-2 js-tabs"
+        selectedIndex={tabIndex}
+        onSelect={(index) => setTabIndex(index)}
+      >
       <TabList className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20">
         {tabs.map((tab, index) => (
           <Tab key={index} className="col-auto">
@@ -56,9 +51,9 @@ const makeLinkModal = (props) => {
         ))}
       </div>
     </Tabs>
-          <ToastContainer />
-          </div>
+    <ToastContainer />
+    </div>
   );
 };
 
-export default makeLinkModal;
+export default DashTab;

@@ -45,6 +45,12 @@ const AffiliateSchema = new mongoose.Schema({
   telLinks: {
     type: String,
   },
+  subjectLines: {
+    type: String,
+  },
+  fromNames: {
+    type: String,
+  },
   resultLink: {
     type: String,
   }

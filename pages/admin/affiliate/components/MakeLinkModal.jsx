@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { getOffers } from "../../../../services/affiliate/offer";
 import MakeLink from './MakeLink'
 import AffiliateLinks from './AffiliateLinks'
-import SubAndFrom from './SubAndFrom'
+import SubAndName from './SubAndFrom'
 
 const makeLinkModal = (props) => {
   const offer = props.dataSource
@@ -21,7 +21,7 @@ const makeLinkModal = (props) => {
     },
     {
       label: "Sub Lines & From Names",
-      content: <SubAndFrom dataSource={offer} update={props.update} />,
+      content: <SubAndName dataSource={offer} update={props.update} />,
     },
   ];
 

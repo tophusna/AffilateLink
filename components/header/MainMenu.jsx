@@ -142,8 +142,8 @@ const MainMenu = ({ style = "" }) => {
           }
         >
           <Link href="/hotel/hotel-list-v1">Businesses</Link>
-        </li> */}
-        {/* <li
+        </li>
+        <li
           className={router.pathname === "/blog/blog-list-v2" ? "current" : ""}
         >
           <Link href="/blog/blog-list-v2">Reviews</Link>

@@ -93,7 +93,7 @@ const AffiliateLinks = (props) => {
           
               <div className="col-md-6">
                 <div className="form-input">
-                  <input type="text" onChange={addOffLink} required />
+                  <input type="text" onBlur={addOffLink} required />
                   <label className="lh-1 text-16 text-light-1">Insert Offer Link</label>
                 </div>
                 <div className="">
@@ -104,7 +104,7 @@ const AffiliateLinks = (props) => {
               </div>
               <div className="col-md-6">
                 <div className="form-input">
-                  <input type="text" onChange={addUnsubLink} required />
+                  <input type="text" onBlur={addUnsubLink} required />
                   <label className="lh-1 text-16 text-light-1">Insert Unsub Link</label>
                 </div>
                 <div className="">
@@ -115,7 +115,7 @@ const AffiliateLinks = (props) => {
               </div>
               <div className="col-md-6">
                 <div className="form-input">
-                  <input type="text" onChange={addPrivacyLink} required />
+                  <input type="text" onBlur={addPrivacyLink} required />
                   <label className="lh-1 text-16 text-light-1">Insert Privacy Link</label>
                 </div>
                 <div className="">
@@ -126,7 +126,7 @@ const AffiliateLinks = (props) => {
               </div>
               <div className="col-md-6">
                 <div className="form-input">
-                  <input type="text" onChange={addCondLink} required />
+                  <input type="text" onBlur={addCondLink} required />
                   <label className="lh-1 text-16 text-light-1">Insert Condition Link</label>
                 </div>
                 <div className="">
@@ -137,7 +137,7 @@ const AffiliateLinks = (props) => {
               </div>
               <div className="col-md-6">
                 <div className="form-input">
-                  <input type="text" onChange={addTelephoneLink} required />
+                  <input type="text" onBlur={addTelephoneLink} required />
                   <label className="lh-1 text-16 text-light-1">Insert Telephone Link</label>
                 </div>
                 <div className="">
