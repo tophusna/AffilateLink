@@ -3,12 +3,20 @@ import { makeLink } from "../../../../services/affiliate/offer";
 import { ToastContainer, toast } from "react-toastify";
 import { getOffers } from "../../../../services/affiliate/offer";
 
+import { useRouter } from 'next/router'
+
 let ElasticEmail = require('@elasticemail/elasticemail-client');
  
 
 
 
 const makeLinkModal = (props) => {
+
+  const router = useRouter()
+  console.log('route===>', router)
+
+  console.log('s')
+
   const offer = props.dataSource
 
   const createLinkRef = useRef(null)
@@ -136,7 +144,7 @@ const makeLinkModal = (props) => {
               <div className="col-md-6">
                 <div className="form-input ">
                   <input ref={offerLinkRef} type="text" required />
-                  <label className="lh-1 text-16 text-light-1">Offer Link</label>
+                  <label className="lh-1 text-16 text-light-1">Offer ID</label>
                 </div>
               </div>
               {/* End col-6 */}
@@ -144,7 +152,7 @@ const makeLinkModal = (props) => {
                 <div className="form-input ">
                   <input ref={affiliateLinkRef} type="text" />
                   <label className="lh-1 text-16 text-light-1">
-                    Affiliate Link
+                    Affiliate ID
                   </label>
                 </div>
               </div>
