@@ -12,11 +12,8 @@ const schema = Joi.object({
 export default async (req, res) => {
   await ConnectDB();
 
-  console.log('body=sss>', req.body)
-
   const { username, password } = req.body;
   const { error } = schema.validate({ password });
-
 
   if (error)
     return res.status(401).json({
@@ -45,7 +42,6 @@ export default async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "2h" }
     );
-
 
     const finalData = { token, user: checkUser };
     return res

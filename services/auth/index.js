@@ -46,6 +46,8 @@ export const login_me = async (formData) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Access-Control-Allow-Origin': '*' ,
+          'Origin': 'http://128.199.168.105:3001/api/auth/login', 
         },
         body: JSON.stringify(formData),
       }
